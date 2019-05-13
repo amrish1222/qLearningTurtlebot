@@ -21,6 +21,7 @@ class playGame():
         rospy.loginfo("Game Started")
         self.agent.reset()
         self.env.envReset()
+        self.agent.isCollision = False
         count = 0
 #        self.env.envUnPause()
         r = rospy.Rate(10)

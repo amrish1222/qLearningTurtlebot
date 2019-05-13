@@ -10,14 +10,15 @@ from agent import qAgent
 import matplotlib.pyplot as plt
 
 plt.ion()
-#fig, ax = plt.subplots()
+fig, ax = plt.subplots()
 #x, y = [],[]
-#xPlot = []
-#yPlot = []
+xPlot = []
+yPlot = []
 #sc = ax.scatter(x,y)
-#plt.xlim(-100,100)
-#plt.ylim(-100,100)
-#plt.draw()
+plt.xlim(-150,1000)
+plt.ylim(-150,1000)
+plt.draw()
+plt.show()
 
 
 from environment import turtleBotEnv
@@ -40,20 +41,22 @@ for i in range(10000):
     reward = game.runGame()
 #    cummulativeReward.append(game.runGame())
     
-#    xPlot.append(i)
-#    yPlot.append(reward)
+    xPlot.append(i)
+    yPlot.append(reward)
 #    
 #    sc.set_offsets(np.c_[xPlot,yPlot])
 #    fig.canvas.draw_idle()
 #    plt.pause(0.1)
 #    
 #    plt.show()
-    plt.plot(i,reward,'-r', linewidth = 10)
-    plt.plot(i,reward,'-g', linewidth = 1)
-#    plt.axis("equal")
-    plt.draw()
-    plt.pause(0.00000001)
-    
+    if i %2 ==0:
+        plt.plot(xPlot,yPlot ,'r-', linewidth=1)
+        plt.axis("equal")
+        plt.draw()
+        plt.pause(0.00000001)
+        plt.show()
+        xPlot = xPlot[-1:]
+        yPlot = yPlot[-1:]
     
     if i % 50 == 0:
         qt.saveQt()

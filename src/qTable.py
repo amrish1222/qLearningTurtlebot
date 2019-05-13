@@ -19,7 +19,7 @@ class qTable:
 
     def getActionDict(self):
         self.actionDict = dict()
-        for ndx in len(self.numActions):
+        for ndx in range(self.numActions):
             self.actionDict[ndx] = ndx
 
     def getDefaultActionWeights(self):

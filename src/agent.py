@@ -11,17 +11,20 @@ import random
 from qTable import qTable
 
 class qAgent():
-    def __init__(self):
+    def __init__(self,
+                 _env):
         # self.rospy.init_node('qAgent')
         self.turtleName = ""
         self.velocityTopic = '/mobile_base/commands/velocity'
         self.totalReward = 0
-        self.qTable = dict()
         self.velPub = rospy.Publisher(self.velocityTopic, Twist, queue_size=10)
         self.isCollision = False
         self.LINX = 0.0 #Always forward linear velocity.
         self.minRange = 0.6 #THRESHOLD value for laser scan.
-        self. currentState = []
+        self.currentState = 0
+        self.nextState = 0
+        self.env = _env
+        self.islearning = True
 
     def doAction(self, action):
         twist = self.genActionMsg(action)
@@ -36,17 +39,16 @@ class qAgent():
         pass
 
     def getAction(self,
-                  qClass : qTable,
-                  currState,
-                  possibleActions):
+                  qClass,
+                  currState):
         if self.islearning:
-            return qClass.eGreedyPolicy(currState,possibleActions)
-        else:
-            qVals = qClass.qTable.setdefault(currState)
-            posQvals = [qVals[self.actionDict[act]] for act in possibleActions]
-            maxNdx = posQvals.index(max(posQvals))
-            maxAct = possibleActions[maxNdx]
-        return maxAct
+            return qClass.eGreedyPolicy(currState)
+#        else:
+#            qVals = qClass.qTable.setdefault(currState)
+#            posQvals = [qVals[self.actionDict[act]] for act in possibleActions]
+#            maxNdx = posQvals.index(max(posQvals))
+#            maxAct = possibleActions[maxNdx]
+#        return maxAct
 
     def genActionMsg(self,actionIndex):
         twist = Twist()
@@ -58,7 +60,7 @@ class qAgent():
             twist.angular.z = 0.3
         elif actionIndex == 2:
             twist.linear.x = 0.05
-            twist.angular.z = 0.3
+            twist.angular.z = -0.3
         else:
             twist.linear.x = 0
             twist.angular.z = 0
@@ -73,19 +75,24 @@ class qAgent():
                 if math.isnan(val):
                     state.append(6)
                 else:
-                    state.append(val)
+                    state.append(int(val))
             if val < self.minRange:
                 self.isCollision = True
-        self.currentState = state
+        self.currentState = self.env.stateDict[tuple(state)]
+        rospy.loginfo("laser scan Callback")
 
     def getReward(self, prevAction):
-        if self.isCollision
-            return -4
+        if self.isCollision:
+            return -50
         if prevAction == 0:
             return 4
-        elif prevAction == 2:
+        elif prevAction == 1:
             return 2
         elif prevAction == 2:
             return 2
         else:
             return 0
+            
+    def reset(self):
+        self.totalReward = 0
+        

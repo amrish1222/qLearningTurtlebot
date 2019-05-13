@@ -22,13 +22,14 @@ class turtleBotEnv():
     def genStates(self):
         index = -1
         self.stateDict = dict()
-        for i in range(6):
-            for j in range(6):
-                for k in range(6):
-                    for l in range(6):
+        for i in range(0,7):
+            for j in range(0,7):
+                for k in range(0,7):
+                    for l in range(0,7):
                         index+=1
                         self.stateDict[(i,j,k,l)] = index
         self.numStates = index
+        
     
     def genActions(self):
         tempAction = []

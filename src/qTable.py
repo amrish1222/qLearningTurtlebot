@@ -1,6 +1,8 @@
 import numpy as np
 import random
 import copy
+import pickle
+
 
 class qTable:
     def __init__(self,
@@ -47,7 +49,7 @@ class qTable:
         maxNdx = posQvals.index(max(posQvals))
         maxAct = possibleActions[maxNdx]
         finalAct = 0
-        if random.random() >= self.epsilon:
+        if random.random() <= self.epsilon:
             finalAct = maxAct
         else:
             finalAct = possibleActions.pop(maxNdx)
@@ -56,3 +58,11 @@ class qTable:
             elif len(possibleActions) > 1:
                 finalAct = possibleActions[random.randint(0,len(possibleActions)-1)]
         return finalAct
+        
+    def saveQt(self):
+        with open('/home/amrish/Documents/filename.pickle', 'wb') as handle:
+            pickle.dump(self.qTable , handle, protocol=pickle.HIGHEST_PROTOCOL)
+            
+    def loadQt(self):
+        with open('/home/amrish/Documents/filename.pickle', 'rb') as handle:
+            self.qTable = pickle.load(handle)

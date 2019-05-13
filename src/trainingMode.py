@@ -23,14 +23,6 @@ for i in range(3000):
     if qt.epsilon > 0.05:
         qt.epsilon -= 0.005
     game.runGame()
+    if i % 200 == 0:
+        qt.saveQt()
     pass
-
-#==============================================================================
-# print("hellom")
-# r =  rospy.Rate(1)
-# while not rospy.is_shutdown():
-#     rospy.loginfo("hellomain")
-#     qA1.doAction()
-#     r.sleep()
-# #rospy.spin()
-#==============================================================================

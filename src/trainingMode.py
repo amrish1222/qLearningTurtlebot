@@ -11,14 +11,12 @@ import matplotlib.pyplot as plt
 
 plt.ion()
 fig, ax = plt.subplots()
-#x, y = [],[]
-xPlot = []
-yPlot = []
-#sc = ax.scatter(x,y)
-plt.xlim(-150,1000)
+x, y = [],[]
+xPlot, yPlot = [],[]
+sc = ax.plot(x,y)
+plt.xlim(-150,2000)
 plt.ylim(-150,1000)
 plt.draw()
-plt.show()
 
 
 from environment import turtleBotEnv
@@ -50,10 +48,10 @@ for i in range(10000):
 #    
 #    plt.show()
     if i %2 ==0:
-        plt.plot(xPlot,yPlot ,'r-', linewidth=1)
-        plt.axis("equal")
-        plt.draw()
-        plt.pause(0.00000001)
+#        sc.set_offsets(np.c_[xPlot,yPlot])
+        plt.plot(xPlot,yPlot, 'b-')
+        fig.canvas.draw_idle()
+        plt.pause(0.1)
         plt.show()
         xPlot = xPlot[-1:]
         yPlot = yPlot[-1:]
@@ -62,6 +60,6 @@ for i in range(10000):
         qt.saveQt()
         print(cummulativeReward)
         
-        if qt.epsilon > 0.05:
+        if qt.epsilon < 9.95:
             qt.epsilon += 0.05
     pass

@@ -83,7 +83,7 @@ class qAgent():
 
     def getReward(self, prevAction):
         if self.isCollision:
-            return -100
+            return -200
         if prevAction == 0:
             return 4
         elif prevAction == 1:

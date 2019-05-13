@@ -24,7 +24,7 @@ for i in range(10000):
     
     cummulativeReward.append(game.runGame())
     
-    if i % 10 == 0:
+    if i % 50 == 0:
         qt.saveQt()
         print(cummulativeReward)
         if qt.epsilon > 0.05:

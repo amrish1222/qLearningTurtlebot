@@ -4,28 +4,27 @@ import copy
 
 class qTable:
     def __init__(self,
-                 _allActions,
                  _numActions,
                  _learningFactor = 0.2,
                  _discountFactor = 0.3,
                  _epsilon = 0.6):
-        
+
         self.numActions = _numActions
         self.alpha = _learningFactor
         self.gamma = _discountFactor
         self.epsilon = _epsilon
         self.defaultActWt = self.getDefaultActionWeights()
-        self.getActionDict(_allActions)
+        self.getActionDict()
         self.qTable = dict()
-        
-    def getActionDict(self, allActions):
+
+    def getActionDict(self):
         self.actionDict = dict()
-        for ndx,action in enumerate(allActions):
-            self.actionDict[action] = ndx
+        for ndx in len(self.numActions):
+            self.actionDict[ndx] = ndx
 
     def getDefaultActionWeights(self):
-        return tuple([0]*self.numActions)
-    
+        return tuple([1/self.numActions]*self.numActions)
+
     def updateTable(self,
                     prevState,
                     prevAction,
@@ -39,10 +38,10 @@ class qTable:
         qNew = qPrev + self.alpha * (reward + self.gamma* qPrevMax - qPrev)
         qPrevAll[prevActNdx] = qNew
         self.qTable[prevState] = tuple(qPrevAll)
-        
-    def eGreedyPolicy(self, 
-                      currState,
-                      possibleActions):
+
+    def eGreedyPolicy(self,
+                      currState):
+        possibleActions = self.actionDict.values()
         qVals = self.qTable.setdefault(currState, self.defaultActWt)
         posQvals = [qVals[self.actionDict[act]] for act in possibleActions]
         maxNdx = posQvals.index(max(posQvals))
@@ -56,5 +55,4 @@ class qTable:
                 finalAct = possibleActions[-1]
             elif len(possibleActions) > 1:
                 finalAct = possibleActions[random.randint(0,len(possibleActions)-1)]
-                
-return finalAct
+        return finalAct

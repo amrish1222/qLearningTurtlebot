@@ -34,6 +34,10 @@ qt = qTable(env.numActions)
 game = playGame(env, qA1, qt)
 cummulativeReward = []
 rospy.loginfo("Variables Initialized")
+
+qt.loadSeedQt()
+print(qt.qTable)
+
 for i in range(10000):
     rospy.loginfo("Game number= "+ str(i))
     reward = game.runGame()

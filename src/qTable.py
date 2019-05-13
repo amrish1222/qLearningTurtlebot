@@ -2,6 +2,7 @@ import numpy as np
 import random
 import copy
 import pickle
+import os
 
 
 class qTable:
@@ -66,3 +67,10 @@ class qTable:
     def loadQt(self):
         with open('/home/amrish/Documents/filename.pickle', 'rb') as handle:
             self.qTable = pickle.load(handle)
+            
+    def loadSeedQt(self):
+        exists = os.path.isfile('/home/amrish/Documents/seed.pickle')
+        if exists:
+            with open('/home/amrish/Documents/seed.pickle', 'rb') as handle:
+                self.qTable = pickle.load(handle)
+                self.epsilon = 0.7

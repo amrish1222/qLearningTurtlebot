@@ -22,11 +22,11 @@ class playGame():
         self.agent.reset()
         self.env.envReset()
         count = 0
-        self.env.envUnPause()
+#        self.env.envUnPause()
         r = rospy.Rate(10)
-        while count<1000 and not self.agent.isCollision and not rospy.is_shutdown():
+        while count<2000 and not self.agent.isCollision and not rospy.is_shutdown():
             rospy.loginfo("Game Iteration: " + str(count))
-            self.env.envUnPause()
+#            self.env.envUnPause()
             action = self.agent.getAction(self.qClass,self.agent.currentState)
             prevState = self.agent.currentState
             print("action :", action)
@@ -36,7 +36,7 @@ class playGame():
                 rospy.wait_for_message("/scan",sensor_msgs.msg.LaserScan,1.0)
             except rospy.exceptions.ROSException:
                 rospy.loginfo("waiting for scan data")
-            self.env.envPause()
+#            self.env.envPause()
             if self.learning:
                 reward = self.agent.getReward(action)
                 self.agent.totalReward += reward
@@ -44,3 +44,4 @@ class playGame():
             count+=1
 #            rospy.spinOnce()
         rospy.loginfo("game ended")
+        return self.agent.totalReward

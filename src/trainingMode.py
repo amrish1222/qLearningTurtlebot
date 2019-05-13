@@ -17,12 +17,16 @@ qA1 = qAgent(env)
 rospy.Subscriber("scan", sensor_msgs.msg.LaserScan , qA1.LaserScanProcess)
 qt = qTable(env.numActions)
 game = playGame(env, qA1, qt)
+cummulativeReward = []
 rospy.loginfo("Variables Initialized")
-for i in range(3000):
+for i in range(10000):
     rospy.loginfo("Game number= "+ str(i))
-    if qt.epsilon > 0.05:
-        qt.epsilon -= 0.005
-    game.runGame()
-    if i % 200 == 0:
+    
+    cummulativeReward.append(game.runGame())
+    
+    if i % 10 == 0:
         qt.saveQt()
+        print(cummulativeReward)
+        if qt.epsilon > 0.05:
+            qt.epsilon += 0.05
     pass

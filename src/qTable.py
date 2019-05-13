@@ -9,7 +9,7 @@ class qTable:
                  _numActions,
                  _learningFactor = 0.2,
                  _discountFactor = 0.3,
-                 _epsilon = 0.6):
+                 _epsilon = 0.5):
 
         self.numActions = _numActions
         self.alpha = _learningFactor

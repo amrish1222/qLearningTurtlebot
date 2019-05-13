@@ -1,0 +1,11 @@
+<launch>
+
+    <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch">
+        <arg name="world_file" value="$(find qLearningTurtlebot)/worlds/maze2Slow.world"/>
+    </include>
+
+
+    <node pkg="qLearningTurtlebot" name="gameMode" type="gameMode.py" output="screen"/>
+
+
+</launch>

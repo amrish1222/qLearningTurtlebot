@@ -757,66 +757,66 @@
       </link>
       <static>1</static>
       <allow_auto_disable>1</allow_auto_disable>
-      <pose frame=''>-0.85886 1.77416 0 0 -0 0</pose>
+      <pose frame=''>-1.34268 2.14147 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>90 385000000</sim_time>
-      <real_time>90 915910605</real_time>
-      <wall_time>1557737540 709568111</wall_time>
-      <iterations>90385</iterations>
+      <sim_time>88 747000000</sim_time>
+      <real_time>89 359927789</real_time>
+      <wall_time>1557760146 456319468</wall_time>
+      <iterations>88747</iterations>
       <model name='Circuit_ql_1'>
-        <pose frame=''>-1.15886 2.17416 0 0 -0 0</pose>
+        <pose frame=''>-1.34268 2.14147 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='Wall_10'>
-          <pose frame=''>-1.16036 5.09916 0 0 -0 3.14159</pose>
+          <pose frame=''>-1.34418 5.06647 0 0 -0 3.14159</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='Wall_11'>
-          <pose frame=''>-4.08536 2.17416 0 0 0 -1.5708</pose>
+          <pose frame=''>-4.26918 2.14147 0 0 0 -1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='Wall_13'>
-          <pose frame=''>-1.32536 -0.06384 0 0 -0 1.5708</pose>
+          <pose frame=''>-1.50918 -0.09653 0 0 -0 1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='Wall_13_clone'>
-          <pose frame=''>0.17058 1.40218 0 0 -0 1.5708</pose>
+          <pose frame=''>-0.01324 1.36949 0 0 -0 1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='Wall_15'>
-          <pose frame=''>-2.67808 2.13609 0 0 -0 1.5708</pose>
+          <pose frame=''>-2.8619 2.1034 0 0 -0 1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='Wall_15_clone'>
-          <pose frame=''>-1.24803 2.08342 0 0 0 -0.004296</pose>
+          <pose frame=''>-1.43185 2.05073 0 0 0 -0.004296</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='Wall_15_clone_0'>
-          <pose frame=''>-1.21208 2.82488 0 0 0 -0.479256</pose>
+          <pose frame=''>-1.3959 2.79219 0 0 0 -0.479256</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='Wall_6'>
-          <pose frame=''>-1.16036 -0.75084 0 0 -0 0</pose>
+          <pose frame=''>-1.34418 -0.78353 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='Wall_7'>
-          <pose frame=''>1.76464 2.17416 0 0 -0 1.5708</pose>
+          <pose frame=''>1.58082 2.14147 0 0 -0 1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -838,9 +838,9 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>-0 0 21.5953 3.14159 1.57079 3.14159</pose>
-        <view_controller>ortho</view_controller>
-        <projection_type>orthographic</projection_type>
+        <pose frame=''>-9.33243 -1.2593 19.9997 0 1.13742 0.207063</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
       </camera>
     </gui>
   </world>

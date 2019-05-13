@@ -1,6 +1,7 @@
 import numpy as np
 import rospy
 from std_srvs.srv import Empty
+from std_msgs.msg import Empty as EmptyM
 
 class turtleBotEnv():
     def __init__(self):
@@ -10,11 +11,13 @@ class turtleBotEnv():
         self.numActions = 0
         #self.rospy.init_node('turtleBotEnv_node')
         self.resetWorldTopic = '/gazebo/reset_world'
+        self.simResetTopic = 'commands/reset_odometry'
         self.pauseTopic = '/gazebo/pause_physics'
         self.unPauseTopic = '/gazebo/unpause_physics'
         self.reset_world = rospy.ServiceProxy(self.resetWorldTopic, Empty)
         self.pause_world = rospy.ServiceProxy(self.pauseTopic, Empty)
         self.unPause_world = rospy.ServiceProxy(self.unPauseTopic, Empty)
+        self.simReset_world = rospy.Publisher(self.simResetTopic, EmptyM, queue_size=10)
         self.genStates()
         self.genActions()
         
@@ -44,6 +47,8 @@ class turtleBotEnv():
     def envReset(self):
         rospy.wait_for_service(self.resetWorldTopic)
         self.reset_world()
+#        rospy.wait_for_service(self.simResetTopic)
+        self.simReset_world.publish()
     
     def envPause(self):
         rospy.wait_for_service(self.pauseTopic)

@@ -1,15 +1,24 @@
+import rospy
 import numpy as np
 import random
 import copy
 import pickle
 import os
 
+import rospkg
+
+# get an instance of RosPack with the default search paths
+rospack = rospkg.RosPack()
+
+# list all packages, equivalent to rospack list
+rospack.list() 
+
 
 class qTable:
     def __init__(self,
                  _numActions,
                  _learningFactor = 0.2,
-                 _discountFactor = 0.3,
+                 _discountFactor = 0.5,
                  _epsilon = 0.5):
 
         self.numActions = _numActions
@@ -61,16 +70,26 @@ class qTable:
         return finalAct
         
     def saveQt(self):
-        with open('/home/amrish/Documents/filename.pickle', 'wb') as handle:
+        rospack = rospkg.RosPack()
+        rospack.list() 
+        filename = rospack.get_path('qLearningTurtlebot')
+        with open(filename+'/qTable/filename.pickle', 'wb') as handle:
             pickle.dump(self.qTable , handle, protocol=pickle.HIGHEST_PROTOCOL)
             
     def loadQt(self):
-        with open('/home/amrish/Documents/filename.pickle', 'rb') as handle:
+#        with open('/home/amrish/Documents/filename.pickle', 'rb') as handle:
+        rospack = rospkg.RosPack()
+        rospack.list() 
+        filename = rospack.get_path('qLearningTurtlebot')
+        with open(filename+'/qTable/Maze3.pickle', 'rb') as handle:    
             self.qTable = pickle.load(handle)
             
     def loadSeedQt(self):
-        exists = os.path.isfile('/home/amrish/Documents/seed.pickle')
+        rospack = rospkg.RosPack()
+        rospack.list() 
+        filename = rospack.get_path('qLearningTurtlebot')
+        exists = os.path.isfile(filename+'/qTable/seed.pickle')
         if exists:
-            with open('/home/amrish/Documents/seed.pickle', 'rb') as handle:
+            with open(filename+'/qTable/seed.pickle', 'rb') as handle:
                 self.qTable = pickle.load(handle)
                 self.epsilon = 0.7

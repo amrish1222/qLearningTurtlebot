@@ -2,6 +2,8 @@
 
 import rospy
 import sensor_msgs.msg
+from nav_msgs.msg import Odometry
+
 import numpy as np
 from agent import qAgent
 #from geometry_msgs.msg import Twist
@@ -29,6 +31,7 @@ rospy.loginfo("node Created")
 env = turtleBotEnv()
 qA1 = qAgent(env)
 rospy.Subscriber("scan", sensor_msgs.msg.LaserScan , qA1.LaserScanProcess)
+rospy.Subscriber('odom',Odometry,qA1.odometry)
 #rewardPub = rospy.Publisher('/reward', Int64, queue_size=10)
 qt = qTable(env.numActions)
 game = playGame(env, qA1, qt)

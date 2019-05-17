@@ -6,7 +6,11 @@ import math
 from std_msgs.msg import String
 import sensor_msgs.msg
 from geometry_msgs.msg import Twist
+from nav_msgs.msg import Odometry
+import tf
 import random
+from std_msgs.msg import Empty
+from time import time
 
 from qTable import qTable
 
@@ -18,6 +22,7 @@ class qAgent():
         self.velocityTopic = '/mobile_base/commands/velocity'
         self.totalReward = 0
         self.velPub = rospy.Publisher(self.velocityTopic, Twist, queue_size=10)
+        self.reset_odom = rospy.Publisher('/mobile_base/commands/reset_odometry', Empty, queue_size=10)
         self.isCollision = False
         self.LINX = 0.0 #Always forward linear velocity.
         self.minRange = 0.6 #THRESHOLD value for laser scan.
@@ -25,6 +30,8 @@ class qAgent():
         self.nextState = 0
         self.env = _env
         self.islearning = True
+        self.currentPos = (0.0,0.0)
+        self.yaw = 0.0
 
     def doAction(self, action):
         twist = self.genActionMsg(action)
@@ -79,8 +86,21 @@ class qAgent():
             if val < self.minRange:
                 self.isCollision = True
         self.currentState = self.env.stateDict[tuple(state)]
-        rospy.loginfo("laser scan Callback")
+#        rospy.loginfo("laser scan Callback")
+        
+    def odometry(self, msg):
+        loc = msg.pose.pose.position
+        self.currentPos = (loc.x,loc.y)
+        orient = msg.pose.pose.orientation
+        quaternion = (orient.x,
+                      orient.y,
+                      orient.z,
+                      orient.w)
+        euler = tf.transformations.euler_from_quaternion(quaternion)
+        self.yaw = euler[2]
+#        print("odomInput",self.currentPos,self.yaw)
 
+    
     def getReward(self, prevAction):
         if self.isCollision:
             return -200
@@ -95,4 +115,7 @@ class qAgent():
             
     def reset(self):
         self.totalReward = 0
+        timer = time()
+#        while time() - timer < 0.25:
+        self.reset_odom.publish(Empty())
         

@@ -1,9 +1,7 @@
 ## Project for ENPM808F: Exploration of a Bounded Area using Q Learning
 ### Author1- Amrish Baskaran
-### UID: 116301046
 
 ### Author2- Bala Murali Manoghar Sai Sudhakar
-### UID: 116150712
 
 
 ### Install dependencies-
